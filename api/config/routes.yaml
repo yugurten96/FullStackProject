@@ -1,3 +1,27 @@
 #index:
 #    path: /
 #    controller: App\Controller\DefaultController::index
+
+mutation_avg_m2:
+    path: /mutation_avg_m2
+    methods: GET
+    defaults:
+        _controller: App\Controller\MutationController::getAveragePriceM2ByLocalCodeType
+        _api_resource_class: App\Entity\Mutation
+        _api_collection_operation_name: 'avg_m2'
+
+mutation_number_btw_by_period:
+    path: /mutation_number_btw_by_period
+    methods: GET
+    defaults:
+        _controller: App\Controller\MutationController::countMutationBetweenDate
+        _api_resource_class: App\Entity\Mutation
+        _api_collection_operation_name: 'number_mutation'
+
+mutation_number_by_region:
+    path: /mutation_number_by_region
+    methods: GET
+    defaults:
+        _controller: App\Controller\MutationController::getNumberMutationByRegion
+        _api_resource_class: App\Entity\Mutation
+        _api_collection_operation_name: 'number_mutation_by_region'

@@ -51,3 +51,33 @@ It means that you can:
 ## Credits
 
 Created by [Kévin Dunglas](https://dunglas.fr). Commercial support available at [Les-Tilleuls.coop](https://les-tilleuls.coop).
+
+<br/>
+
+# Installation
+
+Télécharger les images (si cela n'a jamais été fait) : 
+
+    docker-compose build --pull --no-cache
+
+Démarrer Docker Compose :
+
+    docker-compose up -d 
+
+Télécharger les ressources des valeurs foncières pour les années souhaitées : https://www.data.gouv.fr/fr/datasets/demandes-de-valeurs-foncieres/
+
+Générer une nouvelles migration de base de données à la racine du projet :
+
+    docker-compose exec php bin/console doctrine:migrations:diff
+
+    docker-compose exec php  bin/console doctrine:migrations:migrate
+
+Charger le fichier de départements : 
+
+    docker-compose exec php bin/console doctrine:fixtures:load --group=group1
+
+Charger ensuite les fichiers de valeurs foncières (années) :
+
+    sudo docker-compose exec php bin/console doctrine:fixtures:load --group=group2 --append
+
+
