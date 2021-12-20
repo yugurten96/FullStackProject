@@ -56,21 +56,41 @@ Created by [Kévin Dunglas](https://dunglas.fr). Commercial support available at
 
 # Installation
 
-Télécharger les images (si cela n'a jamais été fait) : 
+## Première installation
+
+Suprimer le dossier DataFixtures dans api/src
+
+Supprimer les lignes dans api/config/services.yaml :
+
+    bind:
+            $projectDir: '%kernel.project_dir%'
+
+Télécharger les images : 
 
     docker-compose build --pull --no-cache
+
+Remettre le dossier DataFixtures dans api/src
+
+Remettre les lignes dans api/config/services.yaml :
+
+    bind:
+            $projectDir: '%kernel.project_dir%'
+
+## Reprise du projet            
 
 Démarrer Docker Compose :
 
     docker-compose up -d 
-
-Télécharger les ressources des valeurs foncières pour les années souhaitées : https://www.data.gouv.fr/fr/datasets/demandes-de-valeurs-foncieres/
 
 Générer une nouvelles migration de base de données à la racine du projet :
 
     docker-compose exec php bin/console doctrine:migrations:diff
 
     docker-compose exec php  bin/console doctrine:migrations:migrate
+
+Télécharger les ressources des valeurs foncières pour les années souhaitées : https://www.data.gouv.fr/fr/datasets/demandes-de-valeurs-foncieres/    
+
+Mettre ensuite les fichiers texte des années dans api/Donnees_A_Traiter
 
 Charger le fichier de départements : 
 
