@@ -80,11 +80,11 @@ Télécharger les images :
 
 ## Reprise du projet            
 
-Démarrer Docker Compose :
+À la racine du projet, démarrer Docker Compose :
 
     docker-compose up -d 
 
-Générer une nouvelles migration de base de données à la racine du projet (inutile si une migration existe déja dans le projet):
+Générer une nouvelle migration de base de données :
 
     docker-compose exec php bin/console doctrine:migrations:diff
 
@@ -92,15 +92,17 @@ Générer une nouvelles migration de base de données à la racine du projet (in
 
 ### /!\ 
 
-Si jamais il y a des erreurs de migration, il faut supprimer la précédente migration (en remplaçant les x par le numéro de la version) :
+Si jamais il y a des erreurs de migrations, il faut supprimer la précédente migration (en remplaçant les X par la date de la version posant problème) :
 
-    docker-compose exec php bin/console doctrine:migrations:version xxxxxxxxxxxxxx --delete
+    docker-compose exec php bin/console doctrine:migrations:version XXXXXXXXXXXXX --delete
 
 Puis supprimer manuellement la version dans le dossier api/migrations/
 
 ### /!\
 
-Créer ensuite un dossier data dans api puis y mettre les fichiers texte des années.
+Télécharger les ressources des valeurs foncières pour les années souhaitées : (https://www.data.gouv.fr/fr/datasets/demandes-de-valeurs-foncieres/)
+
+Créer ensuite un dossier data dans api/ puis y mettre les fichiers texte des années.
 
 Enfin, pour charger les fichiers de valeurs foncières (années) :
 

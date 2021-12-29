@@ -119,7 +119,7 @@ class AppFixtures extends Fixture
     public function init() {
         if($this->region == null) {
             $this->region = array();
-            $this->region['Auvergne-Rhône-Alpes'] = '01,03,07,15,26,38,42,43,63,73,74';
+            $this->region['Auvergne-Rhône-Alpes'] = '01,03,07,15,26,38,42,43,63,69,73,74';
             $this->region['Bourgogne-Franche-Comté'] = '21,25,39,58,70,71,89,90';
             $this->region['Bretagne'] = '22,29,35,56';
             $this->region['Centre-Val de Loire'] = '18,28,36,37,41,45';
