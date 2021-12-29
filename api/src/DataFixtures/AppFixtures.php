@@ -5,39 +5,40 @@ namespace App\DataFixtures;
 use App\Entity\Property;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
+use Symfony\Component\Console\Helper\ProgressBar;
+use Symfony\Component\Console\Output\ConsoleOutput;
 
-
-class AppFixtures extends Fixture
-{
-
+class AppFixtures extends Fixture {
     private $region;
     private $memory;
     private $memory_count;
 
-    public function load(ObjectManager $manager): void
-    {
+    public function load(ObjectManager $manager): void {
         ini_set('memory_limit', '-1');
         gc_enable();
-        printf(2021 . "\n");
-        $this->loadByYear($manager, 2021);
+        $this->loadYear($manager, 2021);
         /*
-        printf(2020 . "\n");
-        $this->loadByYear($manager, 2020);
-        printf(2019 . "\n");
-        $this->loadByYear($manager, 2019);
-        printf(2018 . "\n");
-        $this->loadByYear($manager, 2018);
-        printf(2017 . "\n");
-        $this->loadByYear($manager, 2017);
-        $this->loadByYear($manager, 0);
+        $this->loadYear($manager, 2020);
+        $this->loadYear($manager, 2019);
+        $this->loadYear($manager, 2018);
+        $this->loadYear($manager, 2017);
         */
     }
 
-    public function loadByYear(ObjectManager $manager, int $year): void
-    {
-        $handle = fopen('data/valeursfoncieres-' . strval($year) . '.txt', "r") or die("Couldn't get handle");
+    public function loadYear(ObjectManager $manager, int $year): void {
+        $filename = 'data/valeursfoncieres-' . strval($year) . '.txt';
+        $handle = fopen($filename, "r");
         if ($handle) {
-            $i = 0;
+            $output = new ConsoleOutput();
+            $output->writeln('<info>' . $year .'</info>');
+            $size = self::getLines($filename);
+            $progressBar = new ProgressBar($output, $size);
+            $progressBar->setBarCharacter('<fg=green>⚬</>');
+            $progressBar->setEmptyBarCharacter("<fg=red>⚬</>");
+            $progressBar->setProgressCharacter("<fg=blue>➤</>");
+            $progressBar->setBarWidth(50);
+            $progressBar->start();
+
             while ($line = stream_get_line($handle, 1024 * 1024, "\n")) {
                 $row_data = explode('|', $line);
                 if ($row_data[9] == "Vente" && ($row_data[35] == '1' || $row_data[35] == '2')) {
@@ -52,11 +53,10 @@ class AppFixtures extends Fixture
                     $property->setCount(0);
                     $this->add($property);
                     gc_collect_cycles();
-                    if($i++ % 10000 == 0) {
-                        echo ".";
-                    }
                 }
-            }
+                $progressBar->advance();
+            }  
+            $progressBar->finish();
             echo "\n";
             fclose($handle);
         }
@@ -69,18 +69,30 @@ class AppFixtures extends Fixture
         gc_collect_cycles();
     }
 
+    public function getLines($filename) {
+        $handle = fopen($filename, "r");
+        $lines = 0;
+
+        while(!feof($handle)){
+            $line = fgets($handle);
+            $lines++;
+        }
+
+        fclose($handle);
+        return $lines;
+    }
+
     public function reset() {
         $this->memory_count = array();
         $this->memory = array();
     }
 
-    public function add(Property $property)
-    {
+    public function add(Property $property) {
         if ($this->memory == null) {
             $this->memory = array();
             $this->memory_count = array();
         }
-        // $this->memory
+
         $title = $property->getSellDate() . "-" . $property->getRegion();
         if (array_key_exists($title, $this->memory)) {
             $pro = $this->memory[$title];
@@ -94,22 +106,21 @@ class AppFixtures extends Fixture
         }
     }
 
-    public function insert(ObjectManager $manager, $array)
-    {
+    public function insert(ObjectManager $manager, $array) {
         $i = 0;
+        $output = new ConsoleOutput();
         foreach ($array as $key => $pro) {
             $manager->persist($pro);
             if(++$i % 500 == 0) {
                 $manager->flush();
                 gc_collect_cycles();
-                printf("-- FLUSH --\n");
+                $output->writeln('<info>Insertion success</info>');
             }
         }
         $manager->flush();
     }
 
-    public function reformat()
-    {
+    public function reformat() {
         foreach ($this->memory as $key => $pro) {
             $pro->setPrice($pro->getPrice() / $this->memory_count[$key]);
             $pro->setSurface($pro->getSurface() / $this->memory_count[$key]);
@@ -136,14 +147,12 @@ class AppFixtures extends Fixture
         }
     }
 
-    public function getRegion($dep)
-    {
+    public function getRegion($dep) {
         $this->init();
         foreach ($this->region as $key => $value) {
             foreach (explode(',', $value) as $d) {
-                if ($dep == $d) {
+                if ($dep == $d)
                     return $key;
-                }
             }
         }
     }
