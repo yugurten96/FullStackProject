@@ -28,7 +28,7 @@ const ReferenceLinks: FunctionComponent<Props> = ({
       <a>
         {useIcon ? (
           <Fragment>
-            <i className="bi bi-search" aria-hidden="true"></i>
+            <i className="bi bi-search" aria-hidden="true"/>
             <span className="sr-only">Show</span>
           </Fragment>
         ) : (

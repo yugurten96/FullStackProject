@@ -1,12 +1,12 @@
 import { NextComponentType, NextPageContext } from "next";
-import { Form } from "../../components/book/Form";
+import { Form } from "../../components/property/Form";
 import Head from "next/head";
 
 const Page: NextComponentType<NextPageContext> = () => (
   <div>
     <div>
       <Head>
-        <title>Create Book </title>
+        <title>Create Property </title>
       </Head>
     </div>
     <Form />

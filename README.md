@@ -54,6 +54,21 @@ Created by [Kévin Dunglas](https://dunglas.fr). Commercial support available at
 
 <br/>
 
+# Fullstack
+
+- Year : M2 IWOCS
+- Subject : WEB
+- TP : n°3
+
+## Author(s)
+
+|Nom|Prenom|
+|--|--|
+| *TAOUALIT* | *Madjid*|
+| *MERZOUK* | *Yugurten*|
+| *GUYOMAR* | *Robin*|
+| *BOURGEAUX* | *Maxence*|
+
 # Installation
 
 ## Première installation
@@ -69,16 +84,24 @@ Démarrer Docker Compose :
 
     docker-compose up -d 
 
-Générer une nouvelles migration de base de données à la racine du projet (innutile si une migration existe déja dans le projet):
+Générer une nouvelles migration de base de données à la racine du projet (inutile si une migration existe déja dans le projet):
 
     docker-compose exec php bin/console doctrine:migrations:diff
 
     docker-compose exec php  bin/console doctrine:migrations:migrate
 
-Mettre les fichiers texte des années dans api/data
+### /!\ 
 
-Charger ensuite les fichiers de valeurs foncières (années) :
+Si jamais il y a des erreurs de migration, il faut supprimer la précédente migration (en remplaçant les x par le numéro de la version) :
+
+    docker-compose exec php bin/console doctrine:migrations:version xxxxxxxxxxxxxx --delete
+
+Puis supprimer manuellement la version dans le dossier api/migrations/
+
+### /!\
+
+Créer ensuite un dossier data dans api puis y mettre les fichiers texte des années.
+
+Enfin, pour charger les fichiers de valeurs foncières (années) :
 
     docker-compose exec php bin/console doctrine:fixtures:load
-
-

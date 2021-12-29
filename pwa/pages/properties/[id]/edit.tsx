@@ -1,32 +1,32 @@
 import { NextComponentType, NextPageContext } from "next";
-import { Form } from "../../../components/greeting/Form";
-import { Greeting } from "../../../types/Greeting";
+import { Form } from "../../../components/property/Form";
+import { Property } from "../../../types/Property";
 import { fetch } from "../../../utils/dataAccess";
 import Head from "next/head";
 
 interface Props {
-  greeting: Greeting;
+  property: Property;
 }
 
 const Page: NextComponentType<NextPageContext, Props, Props> = ({
-  greeting,
+  property,
 }) => {
   return (
     <div>
       <div>
         <Head>
-          <title>{greeting && `Edit Greeting ${greeting["@id"]}`}</title>
+          <title>{property && `Edit Property ${property["@id"]}`}</title>
         </Head>
       </div>
-      <Form greeting={greeting} />
+      <Form property={property} />
     </div>
   );
 };
 
 Page.getInitialProps = async ({ asPath }: NextPageContext) => {
-  const greeting = await fetch(asPath.replace("/edit", ""));
+  const property = await fetch(asPath.replace("/edit", ""));
 
-  return { greeting };
+  return { property };
 };
 
 export default Page;

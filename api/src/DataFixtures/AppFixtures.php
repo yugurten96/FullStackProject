@@ -18,15 +18,19 @@ class AppFixtures extends Fixture
     {
         ini_set('memory_limit', '-1');
         gc_enable();
+        printf(2021 . "\n");
+        $this->loadByYear($manager, 2021);
+        /*
         printf(2020 . "\n");
         $this->loadByYear($manager, 2020);
-  //      printf(2019 . "\n");
-  //      $this->loadByYear($manager, 2019);
-   //     printf(2018 . "\n");
-   //     $this->loadByYear($manager, 2018);
-    //    printf(2017 . "\n");
-  //      $this->loadByYear($manager, 2017);
-        //$this->loadByYear($manager, 0);
+        printf(2019 . "\n");
+        $this->loadByYear($manager, 2019);
+        printf(2018 . "\n");
+        $this->loadByYear($manager, 2018);
+        printf(2017 . "\n");
+        $this->loadByYear($manager, 2017);
+        $this->loadByYear($manager, 0);
+        */
     }
 
     public function loadByYear(ObjectManager $manager, int $year): void

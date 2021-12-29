@@ -1,8 +1,8 @@
 App\Entity\Property:
     property_{1..100}:
         region: '<city()>'
-        surface: '<numberBetween(20, 300)>'
-        price: '<numberBetween(10000, 1000000)>'
+        surface: '<numberBetween(5, 500)>'
+        price: '<numberBetween(1000, 1000000)>'
         sellDay: '<numberBetween(1, 30)>'
         sellMonth: '<numberBetween(1, 12)>'
         sellYear: '<numberBetween(2015, 2021)>'
