@@ -1,5 +1,5 @@
 import Head from "next/head";
-import LineChart from "../../components/lineChart/lineChart";
+import CircularDiagram from "../../components/circularDiagram/circularDiagram";
 import {GetStaticProps} from "next";
 import {fetch} from "../../utils/dataAccess";
 
@@ -8,19 +8,19 @@ const Page = ({data}) => {
     <div>
       <div>
         <Head>
-          <title>Prix moyen du m²</title>
+          <title>Nombre de ventes par régions</title>
           <script src="https://d3js.org/d3.v7.min.js"/>
         </Head>
       </div>
-      <div id="lineChart" style={{width: "50%", margin: "auto"}}>
-        <LineChart data={data}/>
+      <div id="circularDiagram">
+        <CircularDiagram data={data}/>
       </div>
     </div>
   )
 }
 
 export const getStaticProps: GetStaticProps = async (context) => {
-  const collection = await fetch("/property/average");
+  const collection = await fetch("/property/sell/2017");
   return {
     props: {
       data: collection.data,

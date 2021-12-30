@@ -24,7 +24,7 @@ class PropertyController extends AbstractController
             ->findAll();
 
         foreach ($products as $key => $entity) {
-            $title = $entity->getSellMonth() . "-" . $entity->getSellYear();
+            $title = $entity->getSellYear();
             if (array_key_exists($title, $memory)) {
                 $pro = $memory[$title];
                 $pro->setPrice($pro->getPrice() + $entity->getPrice());

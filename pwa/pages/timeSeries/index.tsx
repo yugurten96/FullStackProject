@@ -8,11 +8,11 @@ const Page = ({data}) => {
     <div>
       <div>
         <Head>
-          <title>Nombre de ventes par régions</title>
+          <title>Prix moyen du m²</title>
           <script src="https://d3js.org/d3.v7.min.js"/>
         </Head>
       </div>
-      <div id="timeSeries">
+      <div id="timeSeries" style={{width: "50%", margin: "auto"}}>
         <TimeSeries data={data}/>
       </div>
     </div>
@@ -20,7 +20,7 @@ const Page = ({data}) => {
 }
 
 export const getStaticProps: GetStaticProps = async (context) => {
-  const collection = await fetch("/property/sell/2017");
+  const collection = await fetch("/property/average");
   return {
     props: {
       data: collection.data,

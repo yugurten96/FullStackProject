@@ -118,6 +118,6 @@ On peut maintenant utiliser l'api via différents liens :
 * Page d'accueil : https://localhost/
 * Admin : https://localhost/admin#/
 * Liste des propriétés vendues : https://localhost/properties/
-* LineChart Graph : https://localhost/lineChart/
-* BarChart Graph : https://localhost/barChart/
 * TimeSeries Graph : https://localhost/timeSeries/
+* BarChart Graph : https://localhost/barChart/
+* CircularDiagram Graph : https://localhost/circularDiagram/

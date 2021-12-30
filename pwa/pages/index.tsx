@@ -94,8 +94,8 @@ const Welcome = () => (
               </div>
               <div className="other__content">
                 <h3>
-                  <a href="/lineChart/">
-                    LineChart
+                  <a href="/timeSeries/">
+                    TimeSeries
                   </a>
                 </h3>
               </div>
@@ -118,8 +118,8 @@ const Welcome = () => (
               </div>
               <div className="other__content">
                 <h3>
-                  <a href="/timeSeries/">
-                    TimeSeries
+                  <a href="/circularDiagram/">
+                    CircularDiagram
                   </a>
                 </h3>
               </div>
