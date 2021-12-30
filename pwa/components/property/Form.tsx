@@ -140,19 +140,38 @@ export const Form: FunctionComponent<Props> = ({ property }) => {
               name="price"
             />
             <div className="form-group">
-              <label className="form-control-label" htmlFor="_sellDay">
-                sellDay
+              <label className="form-control-label" htmlFor="_day">
+                day
               </label>
               <input
-                name="sellDay"
-                id="_sellDay"
-                value={values.sellDay ?? ""}
+                name="day"
+                id="_day"
+                value={values.day ?? ""}
                 type="text"
                 placeholder=""
                 className={`form-control${
-                  errors.sellDay && touched.sellDay ? " is-invalid" : ""
+                  errors.day && touched.day ? " is-invalid" : ""
                 }`}
-                aria-invalid={errors.sellDay && touched.sellDay}
+                aria-invalid={errors.day && touched.day}
+                onChange={handleChange}
+                onBlur={handleBlur}
+              />
+            </div>
+            <ErrorMessage className="text-danger" component="div" name="day" />
+            <div className="form-group">
+              <label className="form-control-label" htmlFor="_month">
+                month
+              </label>
+              <input
+                name="month"
+                id="_month"
+                value={values.month ?? ""}
+                type="text"
+                placeholder=""
+                className={`form-control${
+                  errors.month && touched.month ? " is-invalid" : ""
+                }`}
+                aria-invalid={errors.month && touched.month}
                 onChange={handleChange}
                 onBlur={handleBlur}
               />
@@ -160,54 +179,27 @@ export const Form: FunctionComponent<Props> = ({ property }) => {
             <ErrorMessage
               className="text-danger"
               component="div"
-              name="sellDay"
+              name="month"
             />
             <div className="form-group">
-              <label className="form-control-label" htmlFor="_sellMonth">
-                sellMonth
+              <label className="form-control-label" htmlFor="_year">
+                year
               </label>
               <input
-                name="sellMonth"
-                id="_sellMonth"
-                value={values.sellMonth ?? ""}
+                name="year"
+                id="_year"
+                value={values.year ?? ""}
                 type="text"
                 placeholder=""
                 className={`form-control${
-                  errors.sellMonth && touched.sellMonth ? " is-invalid" : ""
+                  errors.year && touched.year ? " is-invalid" : ""
                 }`}
-                aria-invalid={errors.sellMonth && touched.sellMonth}
+                aria-invalid={errors.year && touched.year}
                 onChange={handleChange}
                 onBlur={handleBlur}
               />
             </div>
-            <ErrorMessage
-              className="text-danger"
-              component="div"
-              name="sellMonth"
-            />
-            <div className="form-group">
-              <label className="form-control-label" htmlFor="_sellYear">
-                sellYear
-              </label>
-              <input
-                name="sellYear"
-                id="_sellYear"
-                value={values.sellYear ?? ""}
-                type="text"
-                placeholder=""
-                className={`form-control${
-                  errors.sellYear && touched.sellYear ? " is-invalid" : ""
-                }`}
-                aria-invalid={errors.sellYear && touched.sellYear}
-                onChange={handleChange}
-                onBlur={handleBlur}
-              />
-            </div>
-            <ErrorMessage
-              className="text-danger"
-              component="div"
-              name="sellYear"
-            />
+            <ErrorMessage className="text-danger" component="div" name="year" />
             <div className="form-group">
               <label className="form-control-label" htmlFor="_count">
                 count
@@ -232,28 +224,24 @@ export const Form: FunctionComponent<Props> = ({ property }) => {
               name="count"
             />
             <div className="form-group">
-              <label className="form-control-label" htmlFor="_sellDate">
-                sellDate
+              <label className="form-control-label" htmlFor="_date">
+                date
               </label>
               <input
-                name="sellDate"
-                id="_sellDate"
-                value={values.sellDate ?? ""}
+                name="date"
+                id="_date"
+                value={values.date ?? ""}
                 type="text"
                 placeholder=""
                 className={`form-control${
-                  errors.sellDate && touched.sellDate ? " is-invalid" : ""
+                  errors.date && touched.date ? " is-invalid" : ""
                 }`}
-                aria-invalid={errors.sellDate && touched.sellDate}
+                aria-invalid={errors.date && touched.date}
                 onChange={handleChange}
                 onBlur={handleBlur}
               />
             </div>
-            <ErrorMessage
-              className="text-danger"
-              component="div"
-              name="sellDate"
-            />
+            <ErrorMessage className="text-danger" component="div" name="date" />
 
             {status && status.msg && (
               <div

@@ -73,14 +73,13 @@ Created by [Kévin Dunglas](https://dunglas.fr). Commercial support available at
 
 ## Première installation
 
-Télécharger les images : 
+À la racine du projet, télécharger les images : 
 
     docker-compose build --pull --no-cache
 
-
 ## Reprise du projet            
 
-À la racine du projet, démarrer Docker Compose :
+Démarrer Docker Compose :
 
     docker-compose up -d 
 
@@ -88,11 +87,13 @@ Générer une nouvelle migration de base de données :
 
     docker-compose exec php bin/console doctrine:migrations:diff
 
-    docker-compose exec php  bin/console doctrine:migrations:migrate
+Exécuter la migration :
+
+    docker-compose exec php bin/console doctrine:migrations:migrate
 
 ### /!\ 
 
-Si jamais il y a des erreurs de migrations, il faut supprimer la précédente migration (en remplaçant les X par la date de la version posant problème) :
+Si jamais il y a des erreurs de migrations, il faut supprimer la précédente (remplacer les X par la date de la version posant problème) :
 
     docker-compose exec php bin/console doctrine:migrations:version XXXXXXXXXXXXX --delete
 
@@ -100,7 +101,6 @@ Puis supprimer manuellement la version dans le dossier api/migrations/
 
 Pour des erreurs liées à Symfony Runtime : 
     
-    cd ./api/bin/
     docker-compose exec php composer require symfony/runtime
 
 ### /!\

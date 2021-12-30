@@ -23,8 +23,7 @@ use Doctrine\ORM\Mapping as ORM;
         'path' => '/property/sell/{date}'
     ]
 ])]
-class Property
-{
+class Property {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
@@ -40,108 +39,85 @@ class Property
     private $price;
 
     #[ORM\Column(type: 'string', length: 255)]
-    private $sellDay;
+    private $day;
 
     #[ORM\Column(type: 'string', length: 255)]
-    private $sellMonth;
+    private $month;
 
     #[ORM\Column(type: 'string', length: 255)]
-    private $sellYear;
+    private $year;
 
     #[ORM\Column(type: 'integer', nullable: true)]
     private $count;
 
-    public function getId(): ?int
-    {
+    public function getId(): ?int {
         return $this->id;
     }
 
-    public function getSellDate(): ?string
-    {
-        return $this->sellDay . "/" . $this->sellMonth . "/" . $this->sellYear;
+    public function getDate(): ?string {
+        return $this->day . "/" . $this->month . "/" . $this->year;
     }
 
-    public function getRegion(): ?string
-    {
+    public function getRegion(): ?string {
         return $this->region;
     }
 
-    public function setRegion(string $region): self
-    {
+    public function setRegion(string $region): self {
         $this->region = $region;
-
         return $this;
     }
 
-    public function getSurface(): ?int
-    {
+    public function getSurface(): ?int {
         return $this->surface;
     }
 
-    public function setSurface(int $surface): self
-    {
+    public function setSurface(int $surface): self {
         $this->surface = $surface;
-
         return $this;
     }
 
-    public function getPrice(): ?float
-    {
+    public function getPrice(): ?float {
         return $this->price;
     }
 
-    public function setPrice(float $price): self
-    {
+    public function setPrice(float $price): self {
         $this->price = $price;
-
         return $this;
     }
 
-    public function getSellDay(): ?string
-    {
-        return $this->sellDay;
+    public function getDay(): ?string {
+        return $this->day;
     }
 
-    public function setSellDay(string $sellDay): self
-    {
-        $this->sellDay = $sellDay;
-
+    public function setDay(string $day): self {
+        $this->day = $day;
         return $this;
     }
 
-    public function getSellMonth(): ?string
-    {
-        return $this->sellMonth;
+    public function getMonth(): ?string {
+        return $this->month;
     }
 
-    public function setSellMonth(string $sellMonth): self
-    {
-        $this->sellMonth = $sellMonth;
-
+    public function setMonth(string $month): self {
+        $this->month = $month;
         return $this;
     }
 
-    public function getSellYear(): ?string
-    {
-        return $this->sellYear;
+    public function getYear(): ?string {
+        return $this->year;
     }
 
-    public function setSellYear(string $sellYear): self
-    {
-        $this->sellYear = $sellYear;
-
+    public function setYear(string $year): self {
+        $this->year = $year;
         return $this;
     }
 
-    public function getCount(): ?int
-    {
+    public function getCount(): ?int {
         return $this->count;
     }
 
-    public function setCount(?int $count): self
-    {
+    public function setCount(?int $count): self {
         $this->count = $count;
-
         return $this;
     }
 }

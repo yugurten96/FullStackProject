@@ -6,11 +6,11 @@ export class Property {
     public region?: string,
     public surface?: number,
     public price?: number,
-    public sellDay?: string,
-    public sellMonth?: string,
-    public sellYear?: string,
+    public day?: string,
+    public month?: string,
+    public year?: string,
     public count?: number,
-    public sellDate?: string
+    public date?: string
   ) {
     this["@id"] = _id;
   }

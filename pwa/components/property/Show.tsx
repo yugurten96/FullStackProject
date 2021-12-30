@@ -49,24 +49,24 @@ export const Show: FunctionComponent<Props> = ({ property }) => {
             <td>{property["price"]}</td>
           </tr>
           <tr>
-            <th scope="row">sellDay</th>
-            <td>{property["sellDay"]}</td>
+            <th scope="row">day</th>
+            <td>{property["day"]}</td>
           </tr>
           <tr>
-            <th scope="row">sellMonth</th>
-            <td>{property["sellMonth"]}</td>
+            <th scope="row">month</th>
+            <td>{property["month"]}</td>
           </tr>
           <tr>
-            <th scope="row">sellYear</th>
-            <td>{property["sellYear"]}</td>
+            <th scope="row">year</th>
+            <td>{property["year"]}</td>
           </tr>
           <tr>
             <th scope="row">count</th>
             <td>{property["count"]}</td>
           </tr>
           <tr>
-            <th scope="row">sellDate</th>
-            <td>{property["sellDate"]}</td>
+            <th scope="row">date</th>
+            <td>{property["date"]}</td>
           </tr>
         </tbody>
       </table>

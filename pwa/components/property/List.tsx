@@ -20,11 +20,11 @@ export const List: FunctionComponent<Props> = ({ properties }) => (
           <th>region</th>
           <th>surface</th>
           <th>price</th>
-          <th>sellDay</th>
-          <th>sellMonth</th>
-          <th>sellYear</th>
+          <th>day</th>
+          <th>month</th>
+          <th>year</th>
           <th>count</th>
-          <th>sellDate</th>
+          <th>date</th>
           <th />
         </tr>
       </thead>
@@ -39,11 +39,11 @@ export const List: FunctionComponent<Props> = ({ properties }) => (
               <td>{property["region"]}</td>
               <td>{property["surface"]}</td>
               <td>{property["price"]}</td>
-              <td>{property["sellDay"]}</td>
-              <td>{property["sellMonth"]}</td>
-              <td>{property["sellYear"]}</td>
+              <td>{property["day"]}</td>
+              <td>{property["month"]}</td>
+              <td>{property["year"]}</td>
               <td>{property["count"]}</td>
-              <td>{property["sellDate"]}</td>
+              <td>{property["date"]}</td>
               <td>
                 <ReferenceLinks
                   items={property["@id"]}

@@ -27,6 +27,7 @@ class AppFixtures extends Fixture {
     public function loadYear(ObjectManager $manager, int $year): void {
         $filename = 'data/valeursfoncieres-' . strval($year) . '.txt';
         $handle = fopen($filename, "r");
+
         if ($handle) {
             $output = new ConsoleOutput();
             $output->writeln('<info>' . $year .'</info>');
@@ -43,9 +44,9 @@ class AppFixtures extends Fixture {
                 if ($row_data[9] == "Vente" && ($row_data[35] == '1' || $row_data[35] == '2')) {
                     $property = new Property();
                     $date_info = explode('/', $row_data[8]);
-                    $property->setSellDay($date_info[0]);
-                    $property->setSellMonth($date_info[1]);
-                    $property->setSellYear($date_info[2]);
+                    $property->setDay($date_info[0]);
+                    $property->setMonth($date_info[1]);
+                    $property->setYear($date_info[2]);
                     $property->setPrice(floatval($row_data[10]));
                     $property->setRegion($this->getRegion($row_data[18]));
                     $property->setSurface(intval($row_data[38]));
@@ -92,7 +93,7 @@ class AppFixtures extends Fixture {
             $this->memory_count = array();
         }
 
-        $title = $property->getSellDate() . "-" . $property->getRegion();
+        $title = $property->getDate() . "-" . $property->getRegion();
         if (array_key_exists($title, $this->memory)) {
             $pro = $this->memory[$title];
             $pro->setPrice($pro->getPrice() + $property->getPrice());
@@ -108,6 +109,7 @@ class AppFixtures extends Fixture {
     public function insert(ObjectManager $manager, $array) {
         $i = 0;
         $output = new ConsoleOutput();
+
         foreach ($array as $key => $pro) {
             $manager->persist($pro);
             if(++$i % 500 == 0) {
