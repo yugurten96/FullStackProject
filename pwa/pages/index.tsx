@@ -94,8 +94,32 @@ const Welcome = () => (
               </div>
               <div className="other__content">
                 <h3>
-                  <a href="/d3/">
-                    Graph D3.js
+                  <a href="/lineChart/">
+                    LineChart
+                  </a>
+                </h3>
+              </div>
+            </div>
+            <div className="other__bloc">
+              <div className="other__circle">
+                <Mercure/>
+              </div>
+              <div className="other__content">
+                <h3>
+                  <a href="/barChart/">
+                    BarChart
+                  </a>
+                </h3>
+              </div>
+            </div>
+            <div className="other__bloc">
+              <div className="other__circle">
+                <Mercure/>
+              </div>
+              <div className="other__content">
+                <h3>
+                  <a href="/timeSeries/">
+                    TimeSeries
                   </a>
                 </h3>
               </div>

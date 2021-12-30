@@ -16,12 +16,11 @@ class AppFixtures extends Fixture {
     public function load(ObjectManager $manager): void {
        ini_set('memory_limit', '-1');
        gc_enable();
-       /*
-           $this->loadYear($manager, 2017);
-           $this->loadYear($manager, 2018);
-           $this->loadYear($manager, 2019);
-           $this->loadYear($manager, 2020);
-       */
+
+       $this->loadYear($manager, 2017);
+       $this->loadYear($manager, 2018);
+       $this->loadYear($manager, 2019);
+       $this->loadYear($manager, 2020);
        $this->loadYear($manager, 2021);
     }
 
