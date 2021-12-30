@@ -60,7 +60,7 @@ const Welcome = () => (
               </div>
               <div className="other__content">
                 <h3>
-                  <a href="/docs">API</a>
+                  <a href="/docs/">API</a>
                 </h3>
               </div>
             </div>
@@ -70,7 +70,7 @@ const Welcome = () => (
               </div>
               <div className="other__content">
                 <h3>
-                  <Link href="/admin">
+                  <Link href="/admin/">
                     <a>Admin</a>
                   </Link>
                 </h3>
@@ -82,8 +82,20 @@ const Welcome = () => (
               </div>
               <div className="other__content">
                 <h3>
-                  <a href="/.well-known/mercure/ui/">
-                    Mercure Debugger
+                  <a href="/properties/">
+                    Properties
+                  </a>
+                </h3>
+              </div>
+            </div>
+            <div className="other__bloc">
+              <div className="other__circle">
+                <Mercure/>
+              </div>
+              <div className="other__content">
+                <h3>
+                  <a href="/d3/">
+                    Graph D3.js
                   </a>
                 </h3>
               </div>

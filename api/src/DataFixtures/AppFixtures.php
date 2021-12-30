@@ -14,15 +14,15 @@ class AppFixtures extends Fixture {
     private $memory_count;
 
     public function load(ObjectManager $manager): void {
-        ini_set('memory_limit', '-1');
-        gc_enable();
-        $this->loadYear($manager, 2021);
-        /*
-        $this->loadYear($manager, 2020);
-        $this->loadYear($manager, 2019);
-        $this->loadYear($manager, 2018);
-        $this->loadYear($manager, 2017);
-        */
+       ini_set('memory_limit', '-1');
+       gc_enable();
+       /*
+           $this->loadYear($manager, 2017);
+           $this->loadYear($manager, 2018);
+           $this->loadYear($manager, 2019);
+           $this->loadYear($manager, 2020);
+       */
+       $this->loadYear($manager, 2021);
     }
 
     public function loadYear(ObjectManager $manager, int $year): void {
@@ -55,7 +55,7 @@ class AppFixtures extends Fixture {
                     gc_collect_cycles();
                 }
                 $progressBar->advance();
-            }  
+            }
             $progressBar->finish();
             echo "\n";
             fclose($handle);
@@ -114,9 +114,9 @@ class AppFixtures extends Fixture {
             if(++$i % 500 == 0) {
                 $manager->flush();
                 gc_collect_cycles();
-                $output->writeln('<info>Insertion success</info>');
             }
         }
+        $output->writeln('<info>Insertion successful</info>');
         $manager->flush();
     }
 

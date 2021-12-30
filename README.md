@@ -98,6 +98,11 @@ Si jamais il y a des erreurs de migrations, il faut supprimer la précédente mi
 
 Puis supprimer manuellement la version dans le dossier api/migrations/
 
+Pour des erreurs liées à Symfony Runtime : 
+    
+    cd ./api/bin/
+    docker-compose exec php composer require symfony/runtime
+
 ### /!\
 
 Télécharger les ressources des valeurs foncières pour les années souhaitées : (https://www.data.gouv.fr/fr/datasets/demandes-de-valeurs-foncieres/)
@@ -107,3 +112,10 @@ Créer ensuite un dossier data dans api/ puis y mettre les fichiers texte des an
 Enfin, pour charger les fichiers de valeurs foncières (années) :
 
     docker-compose exec php bin/console doctrine:fixtures:load
+
+On peut maintenant utiliser l'api via différents liens :
+
+* Page d'accueil : https://localhost/
+* Admin : https://localhost/admin#/
+* Liste des propriétés vendues : https://localhost/properties/
+* LineChart Graph exemple : https://localhost/d3/lineChart/
