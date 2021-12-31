@@ -37,9 +37,6 @@ const TimeSeries = ({data}) => {
     svg.append("text")
       .attr("x", (width / 2))
       .attr("y", 0 - (margin.top / 2))
-      .attr("text-anchor", "middle")
-      .style("font-size", "20px")
-      .text("Prix moyen du m²");
 
     // Set the gradient
     svg.append("linearGradient")

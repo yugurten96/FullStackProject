@@ -1,20 +1,24 @@
-import Head from "next/head";
 import TimeSeries from "../../components/timeSeries/timeSeries";
 import {GetStaticProps} from "next";
 import {fetch} from "../../utils/dataAccess";
+import Layout from "../../components/layout";
+import Head from "next/head";
 
 const Page = ({data}) => {
   return (
     <div>
-      <div>
+      <Layout title={
         <Head>
           <title>Prix moyen du m²</title>
+          <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"/>
+          <script src='https://use.fontawesome.com/releases/v5.15.4/js/all.js' data-auto-a11y='true'/>
           <script src="https://d3js.org/d3.v7.min.js"/>
         </Head>
-      </div>
-      <div id="timeSeries" style={{width: "50%", margin: "auto"}}>
-        <TimeSeries data={data}/>
-      </div>
+      } main={
+        <div id="timeSeries">
+          <TimeSeries data={data}/>
+        </div>
+      }/>
     </div>
   )
 }

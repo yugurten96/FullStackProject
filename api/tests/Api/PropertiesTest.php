@@ -8,7 +8,7 @@ use Hautelook\AliceBundle\PhpUnit\RefreshDatabaseTrait;
 
 class PropertiesTest extends ApiTestCase {
     use RefreshDatabaseTrait;
-    
+
     public function testGetProperties() {
         $response = static::createClient()->request('GET', '/properties');
         $this->assertResponseStatusCodeSame(200);
