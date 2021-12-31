@@ -38,4 +38,18 @@ class PropertiesTest extends ApiTestCase {
             'count' => 666,
         ]);
     }
+
+    public function testCreateInvalidProperty() {
+        $response = static::createClient()->request('POST', '/properties', ['json' => [
+            'region' => 'Auvergne-Rhône-Alpes',
+            'surface' => 100,
+            'price' => '500000',
+            'day' => '10',
+            'month' => '02',
+            'year' => '2021',
+            'count' => 666,
+        ]]);
+
+        $this->assertResponseStatusCodeSame(400);
+    }
 }

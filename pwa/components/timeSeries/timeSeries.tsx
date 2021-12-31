@@ -26,17 +26,19 @@ const TimeSeries = ({data}) => {
       .range([0, width]);
     svg.append("g")
       .attr("transform", `translate(0, ${height})`)
-      .call(d3.axisBottom(x).ticks(d3.timeYear));
+      .call(d3.axisBottom(x).ticks(d3.timeYear))
+      .style("font", "12px times");
 
     // Add Y axis
     const y = d3.scaleLinear()
       .domain([0, d3.max(arr, (d) => +d.value)])
       .range([height, 0]);
     svg.append("g")
-      .call(d3.axisLeft(y));
+      .call(d3.axisLeft(y))
+      .style("font", "14px times");
     svg.append("text")
       .attr("x", (width / 2))
-      .attr("y", 0 - (margin.top / 2))
+      .attr("y", 0 - (margin.top / 2));
 
     // Set the gradient
     svg.append("linearGradient")
@@ -53,7 +55,7 @@ const TimeSeries = ({data}) => {
       ])
       .enter().append("stop")
       .attr("offset", d => (d.offset))
-      .attr("stop-color", d => d.color)
+      .attr("stop-color", d => d.color);
 
     // Add the line
     svg.append("path")
@@ -64,8 +66,7 @@ const TimeSeries = ({data}) => {
       .attr("d", d3.line()
         .x(d => x(d.key))
         .y(d => y(d.value))
-        .curve(d3.curveMonotoneX)
-      )
+        .curve(d3.curveMonotoneX));
 
     svg.selectAll(".circle")
       .data(arr)
@@ -75,7 +76,7 @@ const TimeSeries = ({data}) => {
       .attr("cx",d => x(d.key))
       .attr("cy",d => y(d.value))
       .attr("r",3)
-      .style("fill", "red")
+      .style("fill", "red");
   }, [])
 
   return (

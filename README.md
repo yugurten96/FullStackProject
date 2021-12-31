@@ -121,3 +121,9 @@ On peut maintenant utiliser l'api via différents liens :
 * TimeSeries Graph : https://localhost/timeSeries/
 * BarChart Graph : https://localhost/barChart/
 * CircularDiagram Graph : https://localhost/circularDiagram/
+
+## Test
+
+Exécuter les tests :
+
+    docker-compose exec php bin/phpunit
