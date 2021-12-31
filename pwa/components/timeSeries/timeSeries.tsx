@@ -41,12 +41,29 @@ const TimeSeries = ({data}) => {
       .style("font-size", "20px")
       .text("Prix moyen du m²");
 
+    // Set the gradient
+    svg.append("linearGradient")
+      .attr("id", "line-gradient")
+      .attr("gradientUnits", "userSpaceOnUse")
+      .attr("x1", 0)
+      .attr("y1", y(0))
+      .attr("x2", 0)
+      .attr("y2", y(d3.max(arr, (d) => +d.value)))
+      .selectAll("stop")
+      .data([
+        {offset: "50%", color: "blue"},
+        {offset: "100%", color: "red"}
+      ])
+      .enter().append("stop")
+      .attr("offset", d => (d.offset))
+      .attr("stop-color", d => d.color)
+
     // Add the line
     svg.append("path")
       .datum(arr)
       .attr("fill", "none")
-      .attr("stroke", "steelblue")
-      .attr("stroke-width", 1.5)
+      .attr("stroke", "url(#line-gradient)")
+      .attr("stroke-width", 2)
       .attr("d", d3.line()
         .x(d => x(d.key))
         .y(d => y(d.value))
