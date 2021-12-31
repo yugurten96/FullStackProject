@@ -6,6 +6,7 @@ use ApiPlatform\Core\Annotation\ApiResource;
 use App\Controller\PropertyController;
 use App\Repository\PropertyRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: PropertyRepository::class)]
 #[ApiResource(itemOperations: [
@@ -29,24 +30,31 @@ class Property {
     #[ORM\Column(type: 'integer')]
     private $id;
 
+    #[Assert\NotBlank]
     #[ORM\Column(type: 'string', length: 255)]
     private $region;
 
+    #[Assert\Range(min: 9, max: 1000)]
     #[ORM\Column(type: 'integer')]
     private $surface;
 
+    #[Assert\Range(min: 1000, max: 1000000)]
     #[ORM\Column(type: 'float')]
     private $price;
 
+    #[Assert\Range(min: 1, max: 31)]
     #[ORM\Column(type: 'string', length: 255)]
     private $day;
 
+    #[Assert\Range(min: 1, max: 12)]
     #[ORM\Column(type: 'string', length: 255)]
     private $month;
 
+    #[Assert\Range(min: 2017, max: 2021)]
     #[ORM\Column(type: 'string', length: 255)]
     private $year;
 
+    #[Assert\Range(min: 0, max: 1000)]
     #[ORM\Column(type: 'integer', nullable: true)]
     private $count;
 
