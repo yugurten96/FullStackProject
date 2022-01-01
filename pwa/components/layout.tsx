@@ -18,46 +18,46 @@ const Layout = ({title, main}) => {
             <div className="container">
               <ul>
                 <li>
-                    <span className="icon-text">
-                      <a href={"../"}>
-                        <span className="icon"><i className="fas fa-home"/></span>
-                        <span>Home</span></a>
-                    </span>
+                      <span className="icon-text">
+                        <a href={"../"}>
+                          <span className="icon"><i className="fas fa-home"/></span>
+                          <span>Home</span></a>
+                      </span>
                 </li>
                 <li>
-                    <span className="icon-text">
-                      <a href={"../admin#/"}>
-                        <span className="icon"><i className="fas fa-unlock-alt"/></span>
-                        <span>Admin</span></a>
-                    </span>
+                      <span className="icon-text">
+                        <a href={"../admin#/"}>
+                          <span className="icon"><i className="fas fa-unlock-alt"/></span>
+                          <span>Admin</span></a>
+                      </span>
                 </li>
                 <li>
-                    <span className="icon-text">
-                      <a href={"../properties/"}>
-                        <span className="icon"><i className="fas fa-clipboard-list"/></span>
-                        <span>Properties</span></a>
-                    </span>
+                      <span className="icon-text">
+                        <a href={"../properties/"}>
+                          <span className="icon"><i className="fas fa-clipboard-list"/></span>
+                          <span>Properties</span></a>
+                      </span>
                 </li>
                 <li>
-                    <span className="icon-text">
-                      <a href={"../timeSeries/"}>
-                        <span className="icon"><i className="fas fa-chart-line"/></span>
-                        <span>TimeSeries</span></a>
-                    </span>
+                      <span className="icon-text">
+                        <a href={"../timeSeries/"}>
+                          <span className="icon"><i className="fas fa-chart-line"/></span>
+                          <span>TimeSeries</span></a>
+                      </span>
                 </li>
                 <li>
-                    <span className="icon-text">
-                      <a href={"../barChart/"}>
-                        <span className="icon"><i className="fas fa-chart-bar"/></span>
-                        <span>BarChart</span></a>
-                    </span>
+                      <span className="icon-text">
+                        <a href={"../barChart/"}>
+                          <span className="icon"><i className="fas fa-chart-bar"/></span>
+                          <span>BarChart</span></a>
+                      </span>
                 </li>
                 <li>
-                    <span className="icon-text">
-                      <a href={"../circularDiagram/"}>
-                        <span className="icon"><i className="fas fa-chart-pie"/></span>
-                        <span>CircularDiagram</span></a>
-                    </span>
+                      <span className="icon-text">
+                        <a href={"../circularDiagram/"}>
+                          <span className="icon"><i className="fas fa-chart-pie"/></span>
+                          <span>CircularDiagram</span></a>
+                      </span>
                 </li>
               </ul>
             </div>
@@ -65,13 +65,16 @@ const Layout = ({title, main}) => {
         </div>
       </section>
 
-      <div className="columns is-mobile">
-        <div className="column"/>
-        <div className="column">
-          <main>{main}</main>
+      <section>
+        <div className="columns">
+          <div className="column is-half is-offset-one-quarter">
+            <div className="box is-shadowless">
+              <main>{main}</main>
+            </div>
+          </div>
         </div>
-        <div className="column"/>
-      </div>
+      </section>
+
 
       <footer className="footer">
         <div className="content has-text-centered">

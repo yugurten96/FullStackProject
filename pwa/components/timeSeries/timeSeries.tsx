@@ -10,10 +10,13 @@ const TimeSeries = ({data}) => {
     // Append the svg object to the body of the page
     const svg = d3.select("#timeSeries")
       .append("svg")
-      .attr("width", width + margin.left + margin.right)
-      .attr("height", height + margin.top + margin.bottom)
+      .attr("viewBox", "0 0 800 400")
+      .attr("preserveAspectRatio", "xMinYMin meet")
       .append("g")
-      .attr("transform", `translate(${margin.left},${margin.top})`);
+      .attr("transform", `translate(${margin.left},${margin.top})`)
+      .style("display", "block")
+      .style('margin', 'auto')
+      .style('overflow', 'visible');
 
     // Reading data
     const arr = data.map(d => {
@@ -36,9 +39,6 @@ const TimeSeries = ({data}) => {
     svg.append("g")
       .call(d3.axisLeft(y))
       .style("font", "14px times");
-    svg.append("text")
-      .attr("x", (width / 2))
-      .attr("y", 0 - (margin.top / 2));
 
     // Set the gradient
     svg.append("linearGradient")
@@ -58,7 +58,7 @@ const TimeSeries = ({data}) => {
       .attr("stop-color", d => d.color);
 
     // Add the line
-    svg.append("path")
+    const path = svg.append("path")
       .datum(arr)
       .attr("fill", "none")
       .attr("stroke", "url(#line-gradient)")
@@ -67,6 +67,18 @@ const TimeSeries = ({data}) => {
         .x(d => x(d.key))
         .y(d => y(d.value))
         .curve(d3.curveMonotoneX));
+
+    // Add animation to the graph
+    let totalLength = path.node().getTotalLength();
+
+    path
+      .attr("stroke-dashoffset", totalLength)
+      .attr("stroke-dasharray", totalLength)
+      .transition(d3
+        .transition()
+        .ease(d3.easeSin)
+        .duration(3000))
+      .attr("stroke-dashoffset", 0);
 
     svg.selectAll(".circle")
       .data(arr)
