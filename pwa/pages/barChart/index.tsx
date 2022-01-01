@@ -1,20 +1,28 @@
 import Head from "next/head";
 import BarChart from "../../components/barChart/barChart";
 import {GetStaticProps} from "next";
+import Layout from "../../components/layout";
 import {fetch} from "../../utils/dataAccess";
+import TimeSeries from "../../components/timeSeries/timeSeries";
 
 const Page = ({data}) => {
   return (
     <div>
       <div>
-        <Head>
-          <title>Nombre total de ventes</title>
-          <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js"/>
-        </Head>
+        <Layout title={
+          <Head>
+            <title>Nombre total de ventes</title>
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"/>
+            <script src='https://use.fontawesome.com/releases/v5.15.4/js/all.js' data-auto-a11y='true'/>
+            <script src="https://d3js.org/d3.v7.min.js"/>
+          </Head>
+        } main={
+          <div id="barchart">
+            <BarChart data={data}/>
+          </div>
+        }/>
       </div>
-      <div id="barChart">
-        <BarChart data={data}/>
-      </div>
+
     </div>
   )
 }
