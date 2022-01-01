@@ -177,5 +177,41 @@ class PropertiesTest extends ApiTestCase {
             'hydra:description' => 'count: This value should be between 0 and 1000.',
         ]);
     }
+
+    public function testGetAverage() {
+        $response = static::createClient()->request('GET', '/property/average');
+        $this->assertResponseIsSuccessful();
+        $this->assertResponseStatusCodeSame(200);
+
+        $body = json_decode($response->getContent(), true);
+        $this->assertIsArray($body);
+
+        $years = ['2017', '2018', '2019', '2020', '2021'];
+
+        foreach ($body['data'] as $row) {
+            $this->assertArrayHasKey('key', $row);
+            $this->assertArrayHasKey('value', $row);
+
+            $yearName = $row['key'];
+            $average =  (float) $row['value'];
+
+            $valid = '';
+
+            if (in_array($yearName, $years)) 
+                $valid = $yearName;
+
+            $this->assertThat(
+                $yearName,
+                $this->EqualTo($valid),
+                "L'année doit être comprise entre 2017 et 2021"
+            );
+
+            $this->assertThat(
+                $average,
+                $this->greaterThan(0),
+                "La moyenne par année doit être strictement positive"
+            );
+        }
+    }
     
 }

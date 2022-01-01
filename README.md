@@ -124,6 +124,14 @@ On peut maintenant utiliser l'api via différents liens :
 
 ## Test
 
+Créer la base de données pour les tests :
+
+    docker-compose exec php bin/console -e test doctrine:database:create
+
+Migrer la base de données :    
+
+    docker-compose exec php bin/console -e test doctrine:migrations:migrate --no-interaction
+
 Exécuter les tests :
 
     docker-compose exec php bin/phpunit
