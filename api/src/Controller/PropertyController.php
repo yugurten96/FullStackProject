@@ -15,35 +15,35 @@ class PropertyController extends AbstractController {
 
     #[Route('/property/average', name: 'average')]
     public function averageYear(PropertyRepository $propertyRepository): Response {
-        $memory = array();
-        $memory_count = array();
+        $tab = array();
+        $tab_count = array();
         $products = $propertyRepository->findAll();
 
         foreach ($products as $key => $entity) {
             $title = $entity->getYear();
-            if (array_key_exists($title, $memory)) {
-                $pro = $memory[$title];
+            if (array_key_exists($title, $tab)) {
+                $pro = $tab[$title];
                 $pro->setPrice($pro->getPrice() + $entity->getPrice());
                 $pro->setSurface($pro->getSurface() + $entity->getSurface());
-                $memory_count[$title] = $memory_count[$title] + 1;
+                $tab_count[$title] = $tab_count[$title] + 1;
             } else {
-                $memory[$title] = $entity;
-                $memory_count[$title] = 1;
+                $tab[$title] = $entity;
+                $tab_count[$title] = 1;
             }
         }
 
-        $this->reformat($memory, $memory_count);
+        $this->reformat($tab, $tab_count);
 
         $map = array_map(function (Property $property): float {
             return round($property->getPrice() /  $property->getSurface(), 2);
-        }, $memory);
+        }, $tab);
 
         return $this->json(["data" => $this->makeArray($map)]);
     }
 
     #[Route('/property/count/{time}/{before}/{after}', name: 'count')]
     public function count(string $time, string $before, string $after, PropertyRepository $propertyRepository): Response {
-        $memory_count = array();
+        $tab_count = array();
 
         $filter = function (Property $property) use ($before, $after) {
             return $this->inDate($property, $before, $after);
@@ -61,17 +61,17 @@ class PropertyController extends AbstractController {
             else
                 $title = $entity->getDay() . "-" . $entity->getMonth() . "-" . $entity->getYear();
 
-            if (array_key_exists($title, $memory_count))
-                $memory_count[$title] = $memory_count[$title] + $entity->getCount();
+            if (array_key_exists($title, $tab_count))
+                $tab_count[$title] = $tab_count[$title] + $entity->getCount();
             else
-                $memory_count[$title] = $entity->getCount();
+                $tab_count[$title] = $entity->getCount();
         }
-        return $this->json(["data" => $this->makeArray($memory_count)]);
+        return $this->json(["data" => $this->makeArray($tab_count)]);
     }
 
     #[Route('/property/sell/{date}', name: 'sell')]
     public function sell(string $date, PropertyRepository $propertyRepository): Response {
-        $memory_count = array();
+        $tab_count = array();
 
         $filter = function (Property $property) use ($date) {
             return $property->getYear() == $date;
@@ -83,23 +83,23 @@ class PropertyController extends AbstractController {
         foreach ($products as $key => $entity) {
             $title = $entity->getRegion();
             $total += $entity->getCount();
-            if (array_key_exists($title, $memory_count))
-                $memory_count[$title] = $memory_count[$title] + $entity->getCount();
+            if (array_key_exists($title, $tab_count))
+                $tab_count[$title] = $tab_count[$title] + $entity->getCount();
             else
-                $memory_count[$title] = $entity->getCount();
+                $tab_count[$title] = $entity->getCount();
         }
 
         $map = array_map(function (int $val) use ($total): float {
             return round($val / $total * 100, 2);
-        }, $memory_count);
+        }, $tab_count);
 
         return $this->json(["data" => $this->makeArray($map, "value")]);
     }
 
-    public function reformat($memory, $memory_count) {
-        foreach ($memory as $key => $pro) {
-            $pro->setPrice($pro->getPrice() / $memory_count[$key]);
-            $pro->setSurface($pro->getSurface() / $memory_count[$key]);
+    public function reformat($tab, $tab_count) {
+        foreach ($tab as $key => $pro) {
+            $pro->setPrice($pro->getPrice() / $tab_count[$key]);
+            $pro->setSurface($pro->getSurface() / $tab_count[$key]);
         }
     }
 

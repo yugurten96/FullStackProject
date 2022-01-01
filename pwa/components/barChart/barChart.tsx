@@ -1,11 +1,9 @@
 import React, {useEffect, useState} from "react";
 import * as d3 from "d3";
 
-
 const dim = {
   width : 800,
   height : 400
-
 }
 
 const getDateFormat = (donne) => {
@@ -36,7 +34,6 @@ const BarChart = ({data}) => {
     }
     return d3.scaleTime()
       .domain(d3.extent(arr, (d) => d.key)).range([0, dim.width])
-
   }
 
   const displayXAxis = (svg, arr, x) => {
@@ -54,11 +51,9 @@ const BarChart = ({data}) => {
         .attr("transform", "translate(0," + dim.height + ")")
         .call(d3.axisBottom(x));
     }
-
   }
 
   useEffect(() => {
-
     const arr = donne.length > 40 ? formatDate(donne) : donne
 
     const svg = d3.select('#bar_chart').html("");
@@ -83,7 +78,7 @@ const BarChart = ({data}) => {
       .style("text-anchor", "middle")
       .style("font-size", "20px")
       .style("font-weight", "bold")
-      .text("Date");
+      .text("Année");
 
     //Scalling for y-axis
     const y = d3.scaleLinear()
@@ -103,8 +98,7 @@ const BarChart = ({data}) => {
       .style("text-anchor", "middle")
       .style("font-size", "20px")
       .style("font-weight", "bold")
-      .text("Nombre de Vente");
-
+      .text("Nombre de Ventes");
 
     const bar = svg.selectAll(".rect")
       .data(arr)
@@ -138,18 +132,9 @@ const BarChart = ({data}) => {
 
   }, [donne])
 
-
-
-  return (
-    <div>
-
-      <div>
-        <svg id="bar_chart"/>
-      </div>
-    </div>
-
+return (
+  <svg id="bar_chart"/>
   )
-
-};
+}
 
 export default BarChart;

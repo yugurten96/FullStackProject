@@ -10,8 +10,8 @@ use Symfony\Component\Console\Output\ConsoleOutput;
 
 class AppFixtures extends Fixture {
     private $region;
-    private $memory;
-    private $memory_count;
+    private $tab;
+    private $tab_count;
 
     public function load(ObjectManager $manager): void {
        ini_set('memory_limit', '-1');
@@ -63,7 +63,7 @@ class AppFixtures extends Fixture {
 
         $this->reformat();
         gc_collect_cycles();
-        $this->insert($manager, $this->memory);
+        $this->insert($manager, $this->tab);
         gc_collect_cycles();
         $this->reset();
         gc_collect_cycles();
@@ -83,26 +83,26 @@ class AppFixtures extends Fixture {
     }
 
     public function reset() {
-        $this->memory_count = array();
-        $this->memory = array();
+        $this->tab_count = array();
+        $this->tab = array();
     }
 
     public function add(Property $property) {
-        if ($this->memory == null) {
-            $this->memory = array();
-            $this->memory_count = array();
+        if ($this->tab == null) {
+            $this->tab = array();
+            $this->tab_count = array();
         }
 
         $title = $property->getDate() . "-" . $property->getRegion();
-        if (array_key_exists($title, $this->memory)) {
-            $pro = $this->memory[$title];
+        if (array_key_exists($title, $this->tab)) {
+            $pro = $this->tab[$title];
             $pro->setPrice($pro->getPrice() + $property->getPrice());
             $pro->setSurface($pro->getSurface() + $property->getSurface());
             $pro->setCount($pro->getCount() + 1);
-            $this->memory_count[$title] = $this->memory_count[$title] + 1;
+            $this->tab_count[$title] = $this->tab_count[$title] + 1;
         } else {
-            $this->memory[$title] = $property;
-            $this->memory_count[$title] = 1;
+            $this->tab[$title] = $property;
+            $this->tab_count[$title] = 1;
         }
     }
 
@@ -122,9 +122,9 @@ class AppFixtures extends Fixture {
     }
 
     public function reformat() {
-        foreach ($this->memory as $key => $pro) {
-            $pro->setPrice($pro->getPrice() / $this->memory_count[$key]);
-            $pro->setSurface($pro->getSurface() / $this->memory_count[$key]);
+        foreach ($this->tab as $key => $pro) {
+            $pro->setPrice($pro->getPrice() / $this->tab_count[$key]);
+            $pro->setSurface($pro->getSurface() / $this->tab_count[$key]);
         }
     }
 

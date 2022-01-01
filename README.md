@@ -83,11 +83,15 @@ Démarrer Docker Compose :
 
     docker-compose up -d 
 
-Générer une nouvelle migration de base de données :
+Consulter les logs des conteneurs :
+
+    docker-compose logs -f
+
+Générer une nouvelle migration de base de données (innutile si une migration est déjà présente dans api/migrations) :
 
     docker-compose exec php bin/console doctrine:migrations:diff
 
-Exécuter la migration :
+Exécuter la migration (innutile si une migration est déjà présente dans api/migrations) :
 
     docker-compose exec php bin/console doctrine:migrations:migrate
 
@@ -99,9 +103,6 @@ Si jamais il y a des erreurs de migrations, il faut supprimer la précédente (r
 
 Puis supprimer manuellement la version dans le dossier api/migrations/
 
-Pour des erreurs liées à Symfony Runtime : 
-    
-    docker-compose exec php composer require symfony/runtime
 
 ### /!\
 
