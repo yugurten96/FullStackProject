@@ -128,7 +128,7 @@ class AppFixtures extends Fixture {
         }
     }
 
-    public function init() {
+    public function getRegion($dep) {
         if($this->region == null) {
             $this->region = array();
             $this->region['Auvergne-Rhône-Alpes'] = '01,03,07,15,26,38,42,43,63,69,73,74';
@@ -146,10 +146,7 @@ class AppFixtures extends Fixture {
             $this->region['Provence-Alpes-Côte d\'Azur'] = '04,05,06,13,83,84';
             $this->region['DOM'] = '971,972,973,974,976';
         }
-    }
-
-    public function getRegion($dep) {
-        $this->init();
+        
         foreach ($this->region as $key => $value) {
             foreach (explode(',', $value) as $d) {
                 if ($dep == $d)
