@@ -121,6 +121,59 @@ On peut maintenant utiliser l'api via différents liens :
 * TimeSeries Graph : https://localhost/timeSeries/
 * BarChart Graph : https://localhost/barChart/
 * CircularDiagram Graph : https://localhost/circularDiagram/
+* GraphiQL Interface : https://localhost/graphql/
+
+## GraphQL
+
+Création d'une propriété :
+
+    mutation {
+        createProperty(input: 
+        {
+        region: "Auvergne-Rhône-Alpes"
+  	    surface: 100
+  	    price: 500000
+  	    day: "10"
+        month: "02"
+        year: "2021"
+        count: 666
+    }) {
+        property {
+            id
+            region
+            surface
+            price
+            day
+            month
+            year
+            count
+            }
+        }      
+    }
+
+Afficher les informations d'une propriété selon son id :
+
+    {
+        property(id: "/properties/118503") {
+        id
+        region
+        surface
+        price
+        day
+        month
+        year
+        count
+        _id
+        }
+    }
+
+Afficher le nombre de propriétés :
+
+    {
+        properties {
+        totalCount
+        }
+    }
 
 ## Test
 
