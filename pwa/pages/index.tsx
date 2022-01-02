@@ -78,6 +78,18 @@ const Welcome = () => (
             </div>
             <div className="other__bloc">
               <div className="other__circle">
+                <Admin/>
+              </div>
+              <div className="other__content">
+                <h3>
+                  <Link href="/graphql/">
+                    <a>GraphiQL</a>
+                  </Link>
+                </h3>
+              </div>
+            </div>
+            <div className="other__bloc">
+              <div className="other__circle">
                 <Mercure/>
               </div>
               <div className="other__content">

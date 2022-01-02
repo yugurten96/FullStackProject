@@ -1,9 +1,21 @@
+import CSS from 'csstype';
+
+const bodyStyle: CSS.Properties = {
+  'min-height': '100vh',
+  'display': 'flex',
+  'flex-direction': 'column'
+};
+
+const footerStyle: CSS.Properties = {
+  'margin-top': 'auto'
+};
+
 const Layout = ({title, main}) => {
   return (
     <div>
       <main>{title}</main>
 
-      <body>
+      <body style={bodyStyle}>
       <section className="hero is-info">
         <div className="hero-body">
           <div className="container has-text-centered">
@@ -76,7 +88,7 @@ const Layout = ({title, main}) => {
       </section>
 
 
-      <footer className="footer">
+      <footer className="footer" style={footerStyle}>
         <div className="content has-text-centered">
             <span className="icon-text">
               <span className="icon"><i className="far fa-copyright"/></span>

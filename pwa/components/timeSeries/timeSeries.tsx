@@ -91,9 +91,7 @@ const TimeSeries = ({data}) => {
       .style("fill", "red");
   }, [])
 
-  return (
-    <svg id="timeSeries"/>
-  )
+  return null
 }
 
 export default TimeSeries;
