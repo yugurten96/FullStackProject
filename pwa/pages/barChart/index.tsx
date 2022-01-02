@@ -17,7 +17,7 @@ const Page = ({data}) => {
       } main={
         <div>
           <div>
-            <p className="title has-text-centered">Nombre total de ventes selon la période sélectionnée</p>
+            <p className="title has-text-centered">Nombre total de ventes</p>
           </div>
           <div id="barchart">
             <BarChart data={data}/>

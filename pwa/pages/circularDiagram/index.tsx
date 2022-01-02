@@ -17,11 +17,23 @@ const Page = ({data}) => {
           </Head>
         } main={
           <div>
-            <div>
-              <p className="title has-text-centered">Nombre de ventes par régions selon l'année</p>
-            </div>
-            <div id="circularDiagram">
-              <CircularDiagram data={data}/>
+            <div className="bar-chart">
+              <div className="columns">
+                <div className="column">
+                  <div>
+                    <p className="title has-text-centered">Nombre de ventes par régions selon l'année</p>
+                  </div>
+                </div>
+              </div>
+              <div className="columns">
+                <div className="column">
+                  <div className="bar-chart">
+                    <div id="circularDiagram">
+                      <CircularDiagram data={data}/>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         }/>

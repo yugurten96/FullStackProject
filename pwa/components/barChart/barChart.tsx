@@ -30,7 +30,6 @@ const BarChart = ({data}) => {
   const [period, setPeriod] = useState("year")
 
   const getXAxis = (arr) => {
-
     if (arr.length <= 40) {
       return d3.scaleBand()
         .range([0, dim.width])
@@ -47,9 +46,9 @@ const BarChart = ({data}) => {
         .attr("transform", "translate(0," + dim.height + ")")
         .call(d3.axisBottom(x))
         .selectAll("text")
-        .attr("transform", "translate(-10,0)rotate(-45)")
+        .attr("transform", "translate(0)")
         .style("text-anchor", "end")
-        .style("font-size", "10px")
+        .style("font-size", "12px")
         .style("font-weight", "bold")
     } else {
       svg.append("g")
@@ -103,7 +102,7 @@ const BarChart = ({data}) => {
       .attr("x", d => x(d.key))
       .attr("fill", "#69b3a2")
       .attr("width", 80)
-      .attr("height", function(d) { return dim.height - y(0); }) // always equal to 0
+      .attr("height", () => {dim.height - y(0)}) // always equal to 0
       .attr("y", d => y(0))
       .attr("class", "rect")
       .on("mousemove", (d, i) => {
@@ -115,16 +114,16 @@ const BarChart = ({data}) => {
           .style('top', d.pageY - 12 + 'px')
           .style('left', d.pageX + 25 + 'px')
       })
-      .on("mouseleave", (d, i) => {
+      .on("mouseleave", (d) => {
         d.target.classList.remove('rect-focus')
         d.target.classList.add("rect")
         info.style("visibility", "hidden")
       })
-      .on('mouseover', function (d, i) {
+      .on('mouseover', () => {
         d3.select(this).transition()
           .attr('opacity', '.85')
       })
-      .on('mouseout', function (d, i) {
+      .on('mouseout', () => {
         d3.select(this).transition()
           .attr('opacity', '1')
       })
@@ -143,24 +142,44 @@ const BarChart = ({data}) => {
     setDonne(data.data)
   }
 
-   return (
+  return (
     <div>
       <div className="bar-chart">
-        <div style={{display: 'flex', width: '0%', justifyContent: 'space-between'}}>
-          <DatePicker date={startDate} setDate={setStartDate} minDate={startDate} type="start"/>
-          <DatePicker date={endDate} setDate={setEndDate} minDate={startDate} type="end"/>
-          <select className="form-select" onChange={event => {
-            setPeriod(event.target.value)
-          }}>
-            <option value="year">Year</option>
-            <option value="month">Month</option>
-            <option value="day">Day</option>
-          </select>
+        <div className="columns">
+          <div className="column">
+          </div>
         </div>
-        <button className="btn btn-outline-info" onClick={handleClick}>Load Date</button>
+        <div className="columns">
+          <div className="column">
+            <DatePicker date={startDate} setDate={setStartDate} minDate={startDate} type="start"/>
+          </div>
+          <div className="column">
+            <DatePicker date={endDate} setDate={setEndDate} minDate={startDate} type="end"/>
+          </div>
+          <div className="column has-text-right">
+            <div className="select is-info is-rounded" onChange={event => {
+              setPeriod(event.target.value)
+            }}>
+              <select className="has-text-info">
+                <option value="year">Year</option>
+                <option value="month">Month</option>
+                <option value="day">Day</option>
+              </select>
+            </div>
+          </div>
+          <div className="column">
+            <button className="button is-info is-outlined is-rounded" onClick={handleClick}>Load Date</button>
+          </div>
+        </div>
       </div>
-      <div>
-        <svg id="bar_chart"/>
+      <div className="columns">
+        <div className="column">
+          <svg id="bar_chart"/>
+        </div>
+      </div>
+      <div className="columns">
+        <div className="column">
+        </div>
       </div>
     </div>
   )
