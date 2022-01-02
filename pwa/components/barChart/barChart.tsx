@@ -85,7 +85,7 @@ const BarChart = ({data}) => {
       .style("text-anchor", "middle")
       .style("font-size", "20px")
       .style("font-weight", "bold")
-      .text("Date");
+      .text("Année");
 
     //Scalling for y-axis
     const y = d3.scaleLinear()
@@ -105,7 +105,7 @@ const BarChart = ({data}) => {
       .style("text-anchor", "middle")
       .style("font-size", "20px")
       .style("font-weight", "bold")
-      .text("Nombre de Vente");
+      .text("Nombre de Ventes");
 
 
     const bar = svg.selectAll(".rect")
@@ -125,7 +125,7 @@ const BarChart = ({data}) => {
         d.target.classList.remove('rect')
         d.target.classList.add("rect-focus")
         const key = arr.length > 40 ? d3.timeFormat(getDateFormat(donne[0].key))(i.key) : i.key;
-        info.html("Date : " + key + "<br/> Nombre de vente :" + i.value)
+        info.html("Date : " + key + "<br/> Nombre de ventes :" + i.value)
           .style("visibility", "visible")
           .style('top', d.pageY - 12 + 'px')
           .style('left', d.pageX + 25 + 'px')
