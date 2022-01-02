@@ -4,19 +4,18 @@ const TimeSeries = ({data}) => {
   useEffect(() => {
     // Set the dimensions and margins of the graph
     const margin = {top: 60, right: 30, bottom: 30, left: 60},
-      width = 800 - margin.left - margin.right,
-      height = 400 - margin.top - margin.bottom;
+      totalWidth = 800,
+      totalHeight = 400,
+      width = totalWidth - margin.left - margin.right,
+      height = totalHeight - margin.top - margin.bottom;
 
     // Append the svg object to the body of the page
     const svg = d3.select("#timeSeries")
       .append("svg")
-      .attr("viewBox", "0 0 800 400")
+      .attr("viewBox", `0 0 ${totalWidth} ${totalHeight}`)
       .attr("preserveAspectRatio", "xMinYMin meet")
       .append("g")
-      .attr("transform", `translate(${margin.left},${margin.top})`)
-      .style("display", "block")
-      .style('margin', 'auto')
-      .style('overflow', 'visible');
+      .attr("transform", `translate(${margin.left},${margin.top})`);
 
     // Reading data
     const arr = data.map(d => {

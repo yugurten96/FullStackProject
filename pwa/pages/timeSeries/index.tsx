@@ -28,7 +28,7 @@ const Page = ({data}) => {
   )
 }
 
-export const getStaticProps: GetStaticProps = async (context) => {
+export const getStaticProps: GetStaticProps = async () => {
   const collection = await fetch("/property/average");
   return {
     props: {

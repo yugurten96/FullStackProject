@@ -54,6 +54,7 @@ const Welcome = () => (
           </div>
           <div className="main__other">
             <h2>Available services:</h2>
+
             <div className="other__bloc">
               <div className="other__circle">
                 <Api/>
@@ -64,78 +65,73 @@ const Welcome = () => (
                 </h3>
               </div>
             </div>
+
+            <div className="other__bloc">
+              <div className="other__circle">
+                <Api/>
+              </div>
+              <div className="other__content">
+                <h3>
+                  <a href="/properties/">Properties</a>
+                </h3>
+              </div>
+            </div>
+
             <div className="other__bloc">
               <div className="other__circle">
                 <Admin/>
               </div>
               <div className="other__content">
                 <h3>
-                  <Link href="/admin/">
-                    <a>Admin</a>
-                  </Link>
+                  <a href="/admin/">Admin</a>
                 </h3>
               </div>
             </div>
+
             <div className="other__bloc">
               <div className="other__circle">
                 <Admin/>
               </div>
               <div className="other__content">
                 <h3>
-                  <Link href="/graphql/">
-                    <a>GraphiQL</a>
-                  </Link>
+                  <a href="/graphql/">GraphiQL</a>
                 </h3>
               </div>
             </div>
+
             <div className="other__bloc">
               <div className="other__circle">
                 <Mercure/>
               </div>
               <div className="other__content">
                 <h3>
-                  <a href="/properties/">
-                    Properties
-                  </a>
+                  <a href="/timeSeries/">TimeSeries</a>
                 </h3>
               </div>
             </div>
+
             <div className="other__bloc">
               <div className="other__circle">
                 <Mercure/>
               </div>
               <div className="other__content">
                 <h3>
-                  <a href="/timeSeries/">
-                    TimeSeries
-                  </a>
+                  <a href="/barChart/">BarChart</a>
                 </h3>
               </div>
             </div>
+
             <div className="other__bloc">
               <div className="other__circle">
                 <Mercure/>
               </div>
               <div className="other__content">
                 <h3>
-                  <a href="/barChart/">
-                    BarChart
-                  </a>
+                  <a href="/circularDiagram/">CircularDiagram</a>
                 </h3>
               </div>
             </div>
-            <div className="other__bloc">
-              <div className="other__circle">
-                <Mercure/>
-              </div>
-              <div className="other__content">
-                <h3>
-                  <a href="/circularDiagram/">
-                    CircularDiagram
-                  </a>
-                </h3>
-              </div>
-            </div>
+
           </div>
         </div>
       </section>

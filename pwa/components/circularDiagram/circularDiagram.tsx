@@ -1,6 +1,4 @@
 import React, {useEffect, useState} from 'react';
-import * as d3 from 'd3';
-import CircularDiagram from "../../pages/circularDiagram";
 
 const dim = {
   width: 1000,
@@ -8,19 +6,18 @@ const dim = {
   margin: 40
 }
 
-const cercularDiagram = ({data}) => {
+const CircularDiagram = ({data}) => {
   const [donne, setData] = useState(data)
   const [year, setYear] = useState("2017")
   const [displayYear, setDisplayYear] = useState("2017")
-
 
   useEffect(() => {
     const dataArr = reformatData(donne);
     const radius = Math.min(dim.width, dim.height) / 2 - dim.margin
 
     const svg = d3.select("#donut_chart")
-      .attr("width", dim.width)
-      .attr("height", dim.height)
+      .attr("viewBox", `0 0 ${dim.width} ${dim.height}`)
+      .attr("preserveAspectRatio", "xMinYMin meet")
       .append("g")
       .attr("transform", "translate(" + dim.width / 2 + "," + dim.height / 2 + ")");
 
@@ -59,7 +56,6 @@ const cercularDiagram = ({data}) => {
     // @ts-ignore
     path.transition().duration(500).attr("d", arc);
 
-
     // Add the polylines between chart and labels:
     svg
       .selectAll('allPolylines')
@@ -95,7 +91,6 @@ const cercularDiagram = ({data}) => {
         return (midangle < Math.PI ? 'middle' : 'middle')
       })
 
-
     // Add the polylines between chart and labels:
     svg
       .selectAll('allLabels')
@@ -125,14 +120,11 @@ const cercularDiagram = ({data}) => {
           tmpArr.push({key: "autre", value: d.value})
         } else {
           tmpArr[index].value = tmpArr[index].value + d.value
-
         }
       }
     })
     return tmpArr
   }
-
-
 
   const onClick = async () => {
     const Collection = await fetch("/property/sell/" + year)
@@ -145,26 +137,28 @@ const cercularDiagram = ({data}) => {
 
   return (
     <div>
-      <div style={{display: 'flex', width: '100%', justifyContent: 'center'}}>
-        <select className="form-select m-1" onChange={onChange} >
-          <option value="2017">2017</option>
-          <option value="2018">2018</option>
-          <option value="2019">2019</option>
-          <option value="2020">2020</option>
-          <option value="2021">2021</option>
-
-
-
-
-
-        </select>
-        <button className="btn btn-outline-secondary m-lg-1"  onClick={onClick}>Load Data</button>
-
-      </div>
+      <section>
+        <div class="columns">
+          <div class="column has-text-right">
+            <div className="select is-info is-rounded" onChange={onChange}>
+              <select>
+                <option value="2017">2017</option>
+                <option value="2018">2018</option>
+                <option value="2019">2019</option>
+                <option value="2020">2020</option>
+                <option value="2021">2021</option>
+              </select>
+            </div>
+          </div>
+          <div class="column">
+            <button className="button is-info is-outlined is-rounded" onClick={onClick}>Load year</button>
+          </div>
+        </div>
+      </section>
       <svg id="donut_chart"/>
       <p className="text-center h1 font-weight-bold">{displayYear}</p>
     </div>
   )
 }
 
-export default cercularDiagram;
+export default CircularDiagram;
