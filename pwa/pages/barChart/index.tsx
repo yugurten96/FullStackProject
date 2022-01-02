@@ -3,7 +3,7 @@ import BarChart from "../../components/barChart/barChart";
 import {GetStaticProps} from "next";
 import Layout from "../../components/layout";
 import {fetch} from "../../utils/dataAccess";
-import TimeSeries from "../../components/timeSeries/timeSeries";
+
 
 const Page = ({data}) => {
   return (
@@ -28,7 +28,7 @@ const Page = ({data}) => {
 }
 
 export const getStaticProps: GetStaticProps = async (context) => {
-  const collection = await fetch("/property/count/year/1-1-2017/1-10-2020");
+  const collection = await fetch("/property/count/year/1-1-2017/1-4-2021");
   return {
     props: {
       data: collection.data,

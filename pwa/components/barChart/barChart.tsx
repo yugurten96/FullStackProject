@@ -1,9 +1,13 @@
 import React, {useEffect, useState} from "react";
 import * as d3 from "d3";
+import {Simulate} from "react-dom/test-utils";
+import mouseEnter = Simulate.mouseEnter;
+
 
 const dim = {
   width : 800,
   height : 400
+
 }
 
 const getDateFormat = (donne) => {
@@ -34,6 +38,7 @@ const BarChart = ({data}) => {
     }
     return d3.scaleTime()
       .domain(d3.extent(arr, (d) => d.key)).range([0, dim.width])
+
   }
 
   const displayXAxis = (svg, arr, x) => {
@@ -51,9 +56,11 @@ const BarChart = ({data}) => {
         .attr("transform", "translate(0," + dim.height + ")")
         .call(d3.axisBottom(x));
     }
+
   }
 
   useEffect(() => {
+
     const arr = donne.length > 40 ? formatDate(donne) : donne
 
     const svg = d3.select('#bar_chart').html("");
@@ -78,7 +85,7 @@ const BarChart = ({data}) => {
       .style("text-anchor", "middle")
       .style("font-size", "20px")
       .style("font-weight", "bold")
-      .text("Année");
+      .text("Date");
 
     //Scalling for y-axis
     const y = d3.scaleLinear()
@@ -98,7 +105,8 @@ const BarChart = ({data}) => {
       .style("text-anchor", "middle")
       .style("font-size", "20px")
       .style("font-weight", "bold")
-      .text("Nombre de Ventes");
+      .text("Nombre de Vente");
+
 
     const bar = svg.selectAll(".rect")
       .data(arr)
@@ -107,7 +115,7 @@ const BarChart = ({data}) => {
       .append("rect")
       .attr("x", d => x(d.key))
       .attr("fill", "#69b3a2")
-      .attr("width", x.bandwidth())
+      .attr("width", 100)
       .attr("height", function(d) { return dim.height - y(0); }) // always equal to 0
       .attr("y", d => y(0))
       .attr("class", "rect")
@@ -118,8 +126,8 @@ const BarChart = ({data}) => {
       .on('mouseout', function (d, i) {
         d3.select(this).transition()
           .attr('opacity', '1')
-
       })
+
 
     bar.exit().remove()
 
@@ -132,9 +140,18 @@ const BarChart = ({data}) => {
 
   }, [donne])
 
-return (
-  <svg id="bar_chart"/>
+
+
+  return (
+    <div>
+
+      <div>
+        <svg id="bar_chart"/>
+      </div>
+    </div>
+
   )
-}
+
+};
 
 export default BarChart;

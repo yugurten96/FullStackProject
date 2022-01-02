@@ -3,3 +3,5 @@
 !/helm/api-platform/charts/.gitignore
 /api/data
 .idea
+# dependencies
+/node_modules
