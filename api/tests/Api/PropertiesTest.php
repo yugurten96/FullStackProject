@@ -178,6 +178,36 @@ class PropertiesTest extends ApiTestCase {
         ]);
     }
 
+    public function testGetCount() {
+        $response = static::createClient()->request('GET', '/property/count/month/1-1-2020/31-12-2020');
+        $this->assertResponseIsSuccessful();
+        $this->assertResponseStatusCodeSame(200);
+
+        $body = json_decode($response->getContent(), true);
+        $this->assertIsArray($body);
+
+        foreach ($body['data'] as $row) {
+            $this->assertArrayHasKey('key', $row);
+            $this->assertArrayHasKey('value', $row);
+
+            $month = $row['key'];
+        }
+    }
+
+    public function testGetSellByYear() {
+        $response = static::createClient()->request('GET', '/property/sell/2020');
+        $this->assertResponseIsSuccessful();
+        $this->assertResponseStatusCodeSame(200);
+
+        $body = json_decode($response->getContent(), true);
+        $this->assertIsArray($body);
+
+        foreach ($body['data'] as $row) {
+            $this->assertArrayHasKey('key', $row);
+            $this->assertArrayHasKey('value', $row);
+        }
+    }
+
     public function testGetAverage() {
         $response = static::createClient()->request('GET', '/property/average');
         $this->assertResponseIsSuccessful();
