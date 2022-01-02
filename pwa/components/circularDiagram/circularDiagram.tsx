@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from 'react';
+import {fetch} from "../../utils/dataAccess";
 
 const dim = {
   width: 1000,
@@ -115,9 +116,9 @@ const CircularDiagram = ({data}) => {
       if (d.value > 4)
         tmpArr.push(d)
       else {
-        let index = tmpArr.findIndex(i => i.key === "autre")
+        let index = tmpArr.findIndex(i => i.key === "Autres")
         if (index === -1) {
-          tmpArr.push({key: "autre", value: d.value})
+          tmpArr.push({key: "Autres", value: d.value})
         } else {
           tmpArr[index].value = tmpArr[index].value + d.value
         }
