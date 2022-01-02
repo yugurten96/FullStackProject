@@ -1,4 +1,7 @@
 import React, {useEffect, useState} from "react";
+import DatePicker from "./DatePicker";
+import "react-datepicker/dist/react-datepicker.css";
+import {fetch} from "../../utils/dataAccess";
 
 const dim = {
   width : 800,
@@ -21,7 +24,10 @@ const formatDate = (data) => {
   })
 }
 const BarChart = ({data}) => {
-  const [donne] = useState(data)
+  const [donne, setDonne] = useState(data)
+  const [startDate, setStartDate] = useState(new Date('2017-01-01'));
+  const [endDate, setEndDate] = useState(new Date('2021-12-31'));
+  const [period, setPeriod] = useState("year")
 
   const getXAxis = (arr) => {
 
@@ -132,9 +138,30 @@ const BarChart = ({data}) => {
       .delay(function(d,i){console.log(i) ; return(i*100)})
   }, [donne])
 
-  return (
+  const handleClick = async () => {
+    const data = await fetch(`/property/count/${period}/${d3.timeFormat("%d-%m-%Y")(startDate)}/${d3.timeFormat("%d-%m-%Y")(endDate)}`)
+    setDonne(data.data)
+  }
+
+   return (
     <div>
-      <svg id="bar_chart"/>
+      <div className="bar-chart">
+        <div style={{display: 'flex', width: '0%', justifyContent: 'space-between'}}>
+          <DatePicker date={startDate} setDate={setStartDate} minDate={startDate} type="start"/>
+          <DatePicker date={endDate} setDate={setEndDate} minDate={startDate} type="end"/>
+          <select className="form-select" onChange={event => {
+            setPeriod(event.target.value)
+          }}>
+            <option value="year">Year</option>
+            <option value="month">Month</option>
+            <option value="day">Day</option>
+          </select>
+        </div>
+        <button className="btn btn-outline-info" onClick={handleClick}>Load Date</button>
+      </div>
+      <div>
+        <svg id="bar_chart"/>
+      </div>
     </div>
   )
 };
