@@ -111,6 +111,8 @@ const BarChart = ({data}) => {
     const bar = svg.selectAll(".rect")
       .data(arr)
 
+    const info = d3.select(".circle-info")
+
     bar.enter()
       .append("rect")
       .attr("x", d => x(d.key))
@@ -119,6 +121,20 @@ const BarChart = ({data}) => {
       .attr("height", function(d) { return dim.height - y(0); }) // always equal to 0
       .attr("y", d => y(0))
       .attr("class", "rect")
+      .on("mousemove", (d, i) => {
+        d.target.classList.remove('rect')
+        d.target.classList.add("rect-focus")
+        const key = arr.length > 40 ? d3.timeFormat(getDateFormat(donne[0].key))(i.key) : i.key;
+        info.html("Date : " + key + "<br/> Nombre de vente :" + i.value)
+          .style("visibility", "visible")
+          .style('top', d.pageY - 12 + 'px')
+          .style('left', d.pageX + 25 + 'px')
+      })
+      .on("mouseleave", (d, i) => {
+        d.target.classList.remove('rect-focus')
+        d.target.classList.add("rect")
+        info.style("visibility", "hidden")
+      })
       .on('mouseover', function (d, i) {
         d3.select(this).transition()
           .attr('opacity', '.85')
@@ -127,6 +143,7 @@ const BarChart = ({data}) => {
         d3.select(this).transition()
           .attr('opacity', '1')
       })
+
 
 
     bar.exit().remove()
