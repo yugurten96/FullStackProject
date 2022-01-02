@@ -25,7 +25,7 @@ const formatDate = (data) => {
 const BarChart = ({data}) => {
   const [donne, setDonne] = useState(data)
   const [startDate, setStartDate] = useState(new Date('2017-01-01'));
-  const [endDate, setEndDate] = useState(new Date('2020-12-30'));
+  const [endDate, setEndDate] = useState(new Date('2021-12-31'));
   const [period, setPeriod] = useState("year")
 
   const getXAxis = (arr) => {
@@ -101,7 +101,7 @@ const BarChart = ({data}) => {
       .append("rect")
       .attr("x", d => x(d.key))
       .attr("fill", "#69b3a2")
-      .attr("width", 100)
+      .attr("width", 80)
       .attr("height", function(d) { return dim.height - y(0); }) // always equal to 0
       .attr("y", d => y(0))
       .attr("class", "rect")
@@ -145,7 +145,7 @@ const BarChart = ({data}) => {
    return (
     <div>
       <div className="bar-chart">
-        <div style={{display: 'flex', width: '70%', justifyContent: 'space-between'}}>
+        <div style={{display: 'flex', width: '0%', justifyContent: 'space-between'}}>
           <DatePicker date={startDate} setDate={setStartDate} color="#5b8da9" minDate={undefined} type="start"/>
           <DatePicker date={endDate} setDate={setEndDate} color="#7c3d3d" minDate={startDate} type="end"/>
           <select className="form-select" onChange={event => {

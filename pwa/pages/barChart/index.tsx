@@ -29,7 +29,7 @@ const Page = ({data}) => {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const collection = await fetch("/property/count/year/1-1-2017/1-4-2021");
+  const collection = await fetch("/property/count/year/1-1-2017/31-12-2021");
   return {
     props: {
       data: collection.data,
