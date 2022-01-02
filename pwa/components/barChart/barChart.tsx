@@ -1,13 +1,8 @@
 import React, {useEffect, useState} from "react";
-import * as d3 from "d3";
-import {Simulate} from "react-dom/test-utils";
-import mouseEnter = Simulate.mouseEnter;
-
 
 const dim = {
   width : 800,
   height : 400
-
 }
 
 const getDateFormat = (donne) => {
@@ -26,7 +21,6 @@ const formatDate = (data) => {
   })
 }
 const BarChart = ({data}) => {
-
   const [donne] = useState(data)
 
   const getXAxis = (arr) => {
@@ -56,17 +50,15 @@ const BarChart = ({data}) => {
         .attr("transform", "translate(0," + dim.height + ")")
         .call(d3.axisBottom(x));
     }
-
   }
 
   useEffect(() => {
-
     const arr = donne.length > 40 ? formatDate(donne) : donne
 
     const svg = d3.select('#bar_chart').html("");
     svg
-      .attr('width', dim.width)
-      .attr('height', dim.height)
+      .attr("viewBox", `0 0 ${dim.width} ${dim.height}`)
+      .attr("preserveAspectRatio", "xMinYMin meet")
       .style("display", "block")
       .style('margin', 'auto')
       .style('overflow', 'visible')
@@ -79,13 +71,7 @@ const BarChart = ({data}) => {
 
     //x-axis Label
     svg.append("text")
-      .attr("transform",
-        "translate(" + (dim.width / 2) + " ," +
-        (dim.height + 60) + ")")
-      .style("text-anchor", "middle")
-      .style("font-size", "20px")
-      .style("font-weight", "bold")
-      .text("Année");
+      .attr("transform", "translate(" + (dim.width / 2) + " ," + (dim.height + 60) + ")")
 
     //Scalling for y-axis
     const y = d3.scaleLinear()
@@ -102,15 +88,8 @@ const BarChart = ({data}) => {
       .attr("transform", "rotate(-90)")
       .attr("x", 0 - (dim.height / 2))
       .attr("y", -100)
-      .style("text-anchor", "middle")
-      .style("font-size", "20px")
-      .style("font-weight", "bold")
-      .text("Nombre de Ventes");
 
-
-    const bar = svg.selectAll(".rect")
-      .data(arr)
-
+    const bar = svg.selectAll(".rect").data(arr)
     const info = d3.select(".circle-info")
 
     bar.enter()
@@ -143,9 +122,6 @@ const BarChart = ({data}) => {
         d3.select(this).transition()
           .attr('opacity', '1')
       })
-
-
-
     bar.exit().remove()
 
     svg.selectAll("rect")
@@ -154,21 +130,13 @@ const BarChart = ({data}) => {
       .attr("y", d => y(d.value))
       .attr("height", d => dim.height - y(d.value))
       .delay(function(d,i){console.log(i) ; return(i*100)})
-
   }, [donne])
-
-
 
   return (
     <div>
-
-      <div>
-        <svg id="bar_chart"/>
-      </div>
+      <svg id="bar_chart"/>
     </div>
-
   )
-
 };
 
 export default BarChart;

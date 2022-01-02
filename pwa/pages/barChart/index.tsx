@@ -9,7 +9,7 @@ const Page = ({data}) => {
     <div>
       <Layout title={
         <Head>
-          <title>Nombre total de ventes</title>
+          <title>BarChart</title>
           <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"/>
           <script src='https://use.fontawesome.com/releases/v5.15.4/js/all.js' data-auto-a11y='true'/>
           <script src="https://d3js.org/d3.v7.min.js"/>
@@ -17,7 +17,7 @@ const Page = ({data}) => {
       } main={
         <div>
           <div>
-            <p className="title has-text-centered">Nombre total de ventes</p>
+            <p className="title has-text-centered">Nombre total de ventes par années</p>
           </div>
           <div id="barchart">
             <BarChart data={data}/>
@@ -28,7 +28,7 @@ const Page = ({data}) => {
   )
 }
 
-export const getStaticProps: GetStaticProps = async (context) => {
+export const getStaticProps: GetStaticProps = async () => {
   const collection = await fetch("/property/count/year/1-1-2017/1-4-2021");
   return {
     props: {
